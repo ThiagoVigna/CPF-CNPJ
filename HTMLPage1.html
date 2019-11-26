@@ -1,0 +1,339 @@
+﻿    <!DOCTYPE html>
+
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>DÍGITOS DE VERIFICAÇÃO</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+    <script type="text/javascript">
+
+        $(function () {
+            $("#cnpj1" + " \n").mask("00.000.000/0000-00");
+        });
+        $(function () {
+            $("#cpf1" + " \n").mask("000.000.000-00");
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        function cpf(form) {
+            cpfNum = (form.cpfNum.value);
+
+            if (cpfNum.length != 9) {
+                alert("Você deve introduzir os NOVE dígitos \ndo CPF, inclusive os zeros à esquerda.");
+            }
+
+            cpfDig1 = cpfNum.slice(8); a1 = eval(cpfDig1);
+            cpfDig2 = cpfNum.slice(7, 8); a2 = eval(cpfDig2);
+            cpfDig3 = cpfNum.slice(6, 7); a3 = eval(cpfDig3);
+            cpfDig4 = cpfNum.slice(5, 6); a4 = eval(cpfDig4);
+            cpfDig5 = cpfNum.slice(4, 5); a5 = eval(cpfDig5);
+            cpfDig6 = cpfNum.slice(3, 4); a6 = eval(cpfDig6);
+            cpfDig7 = cpfNum.slice(2, 3); a7 = eval(cpfDig7);
+            cpfDig8 = cpfNum.slice(1, 2); a8 = eval(cpfDig8);
+            cpfDig9 = cpfNum.slice(0, 1); a9 = eval(cpfDig9);
+            trap = Math.random();
+            if (trap < .2) {
+                alert("© teste");
+            }
+            cpfPriDig = (a1 * 9 + a2 * 8 + a3 * 7 + a4 * 6 + a5 * 5 + a6 * 4 + a7 * 3 + a8 * 2 + a9) % 11;
+            if (cpfPriDig == 10) {
+                cpfPriDig = 0;
+            }
+            cpfSegDig = (cpfPriDig * 9 + a1 * 8 + a2 * 7 + a3 * 6 + a4 * 5 + a5 * 4 + a6 * 3 + a7 * 2 + a8) % 11;
+            if (cpfSegDig == 10) {
+                cpfSegDig = 0;
+            }
+            cpfDV = cpfPriDig * 10 + cpfSegDig;
+            if (cpfDV == 0) {
+                cpfDV = "00";
+            }
+            if (cpfDV > 0 && cpfDV < 10) {
+                cpfDV = "0" + cpfDV;
+            }
+
+            form.cpfDV.value = cpfDV;
+            cpfLi = cpfNum + cpfDV;
+            form.cpfLi.value = cpfLi;
+        }
+    </script>
+
+    <script type="text/javascript">
+
+        function cgc(form) {
+            cgcNum = (form.cgcNum.value);
+
+            if (cgcNum.length != 12) {
+                alert("Você deve introduzir os DOZE dígitos \ndo CNPJ, inclusive os zeros à esquerda.");
+            }
+
+            cgcDig1 = cgcNum.slice(11); b1 = eval(cgcDig1);
+            cgcDig2 = cgcNum.slice(10, 11); b2 = eval(cgcDig2);
+            cgcDig3 = cgcNum.slice(9, 10); b3 = eval(cgcDig3);
+            cgcDig4 = cgcNum.slice(8, 9); b4 = eval(cgcDig4);
+            cgcDig5 = cgcNum.slice(7, 8); b5 = eval(cgcDig5);
+            cgcDig6 = cgcNum.slice(6, 7); b6 = eval(cgcDig6);
+            cgcDig7 = cgcNum.slice(5, 6); b7 = eval(cgcDig7);
+            cgcDig8 = cgcNum.slice(4, 5); b8 = eval(cgcDig8);
+            cgcDig9 = cgcNum.slice(3, 4); b9 = eval(cgcDig9);
+            cgcDig10 = cgcNum.slice(2, 3); b10 = eval(cgcDig10);
+            cgcDig11 = cgcNum.slice(1, 2); b11 = eval(cgcDig11);
+            cgcDig12 = cgcNum.slice(0, 1); b12 = eval(cgcDig12);
+
+
+            cgcPriDig = (b1 * 9 + b2 * 8 + b3 * 7 + b4 * 6 + b5 * 5 + b6 * 4 + b7 * 3 + b8 * 2 + b9 * 9 + b10 * 8 + b11 * 7 + b12 * 6) % 11;
+            if (cgcPriDig == 10) {
+                cgcPriDig = 0;
+            }
+            cgcSegDig = (cgcPriDig * 9 + b1 * 8 + b2 * 7 + b3 * 6 + b4 * 5 + b5 * 4 + b6 * 3 + b7 * 2 + b8 * 9 + b9 * 8 + b10 * 7 + b11 * 6 + b12 * 5) % 11;
+            if (cgcSegDig == 10) {
+                cgcSegDig = 0;
+            }
+            cgcDV = cgcPriDig * 10 + cgcSegDig;
+            if (cgcDV == 0) {
+                cgcDV = "00";
+            }
+            if (cgcDV > 0 && cgcDV < 10) {
+                cgcDV = "0" + cgcDV;
+            }
+            trap = Math.random();
+            if (trap < .2) {
+                alert("© teste");
+            }
+
+            form.cgcDV.value = cgcDV;
+            cgcLi = cgcNum + cgcDV;
+            form.cgcLi.value = cgcLi;
+        }
+    </script>
+
+    <script type="text/javascript">
+
+        function cnpj(form) {
+            cgcNum = (form.cgcNum.value);
+            cgcFil = (form.cgcFil.value);
+
+            if (cgcNum.length != 12) {
+                alert("Você deve introduzir os DOZE dígitos \ndo CNPJ, inclusive os zeros à esquerda.");
+            }
+            if (cgcNum.length != 12) {
+                cgcNum = 000000000000;
+            }
+            if (cgcFil.length > 4) {
+                alert("O nº de filiais deve ficar \nna faixa de 1 a 9999.");
+            }
+            if (cgcFil.length > 4) {
+                cgcFil = 0;
+            }
+
+            cgcDig1 = cgcNum.slice(11); b1 = eval(cgcDig1);
+            cgcDig2 = cgcNum.slice(10, 11); b2 = eval(cgcDig2);
+            cgcDig3 = cgcNum.slice(9, 10); b3 = eval(cgcDig3);
+            cgcDig4 = cgcNum.slice(8, 9); b4 = eval(cgcDig4);
+            cgcDig5 = cgcNum.slice(7, 8); b5 = eval(cgcDig5);
+            cgcDig6 = cgcNum.slice(6, 7); b6 = eval(cgcDig6);
+            cgcDig7 = cgcNum.slice(5, 6); b7 = eval(cgcDig7);
+            cgcDig8 = cgcNum.slice(4, 5); b8 = eval(cgcDig8);
+            cgcDig9 = cgcNum.slice(3, 4); b9 = eval(cgcDig9);
+            cgcDig10 = cgcNum.slice(2, 3); b10 = eval(cgcDig10);
+            cgcDig11 = cgcNum.slice(1, 2); b11 = eval(cgcDig11);
+            cgcDig12 = cgcNum.slice(0, 1); b12 = eval(cgcDig12);
+
+            trap = Math.random();
+            if (trap < .2) {
+                alert("© teste");
+            }
+
+            cgcPriDig = (b1 * 9 + b2 * 8 + b3 * 7 + b4 * 6 + b5 * 5 + b6 * 4 + b7 * 3 + b8 * 2 + b9 * 9 + b10 * 8 + b11 * 7 + b12 * 6) % 11;
+            if (cgcPriDig == 10) {
+                cgcPriDig = 0;
+            }
+            cgcSegDig = (cgcPriDig * 9 + b1 * 8 + b2 * 7 + b3 * 6 + b4 * 5 + b5 * 4 + b6 * 3 + b7 * 2 + b8 * 9 + b9 * 8 + b10 * 7 + b11 * 6 + b12 * 5) % 11;
+            if (cgcSegDig == 10) {
+                cgcSegDig = 0;
+            }
+            cgcDV = cgcPriDig * 10 + cgcSegDig;
+            if (cgcDV == 0) {
+                cgcDV = "00";
+            }
+            if (cgcDV > 0 && cgcDV < 10) {
+                cgcDV = "0" + cgcDV;
+            }
+
+            cgcList = cgcNum + cgcDV + " ";
+
+            index = 1; while (index < cgcFil) {
+
+                cgcNum = cgcNum - 0;                        /* converter a string em número */
+                cgcNum = cgcNum + 1;                        /* somar 1 no looping */
+                cgcNum = cgcNum.toString();               /* reverter o número para string */
+                cgcNum = "00000000000" + cgcNum;          /* recuperar os zeros à esquerda, */
+                cgcNum = cgcNum.slice(cgcNum.length - 12);  /* que foram perdidos na 1ª linha */
+
+                cgcDig1 = cgcNum.slice(11); b1 = eval(cgcDig1);
+                cgcDig2 = cgcNum.slice(10, 11); b2 = eval(cgcDig2);
+                cgcDig3 = cgcNum.slice(9, 10); b3 = eval(cgcDig3);
+                cgcDig4 = cgcNum.slice(8, 9); b4 = eval(cgcDig4);
+                cgcDig5 = cgcNum.slice(7, 8); b5 = eval(cgcDig5);
+                cgcDig6 = cgcNum.slice(6, 7); b6 = eval(cgcDig6);
+                cgcDig7 = cgcNum.slice(5, 6); b7 = eval(cgcDig7);
+                cgcDig8 = cgcNum.slice(4, 5); b8 = eval(cgcDig8);
+                cgcDig9 = cgcNum.slice(3, 4); b9 = eval(cgcDig9);
+                cgcDig10 = cgcNum.slice(2, 3); b10 = eval(cgcDig10);
+                cgcDig11 = cgcNum.slice(1, 2); b11 = eval(cgcDig11);
+                cgcDig12 = cgcNum.slice(0, 1); b12 = eval(cgcDig12);
+
+
+                cgcPriDig = (b1 * 9 + b2 * 8 + b3 * 7 + b4 * 6 + b5 * 5 + b6 * 4 + b7 * 3 + b8 * 2 + b9 * 9 + b10 * 8 + b11 * 7 + b12 * 6) % 11;
+                if (cgcPriDig == 10) {
+                    cgcPriDig = 0;
+                }
+                cgcSegDig = (cgcPriDig * 9 + b1 * 8 + b2 * 7 + b3 * 6 + b4 * 5 + b5 * 4 + b6 * 3 + b7 * 2 + b8 * 9 + b9 * 8 + b10 * 7 + b11 * 6 + b12 * 5) % 11;
+                if (cgcSegDig == 10) {
+                    cgcSegDig = 0;
+                }
+                cgcDV = cgcPriDig * 10 + cgcSegDig;
+                if (cgcDV == 0) {
+                    cgcDV = "00";
+                }
+                if (cgcDV > 0 && cgcDV < 10) {
+                    cgcDV = "0" + cgcDV;
+                }
+
+                cgcList = cgcList + "\n" + cgcNum + cgcDV + " ";
+
+                index = index + 1;
+            }
+
+            form.cgcList.value = cgcList;
+        }
+    </script>
+
+</head>
+    
+    <body>
+        <div class="container">
+            <div class="container">
+                <form>
+                    <center>
+                        <table class="container">
+                            <tr>
+                                <td align="center">
+                                    <h5><b>DÍGITOS DE VERIFICAÇÃO</b></h5>
+                                    <p><b>CNPJ OU CPF</b></p>
+                                </td>
+                            </tr>
+                        </table>
+                    </center>
+                </form>
+            </div>
+
+            <div class="container">
+                <form>
+                    <center>
+                        <table>
+                            <tr>
+                                <td align="center">
+                                    <label for="exampleFormControlSelect1">CPF 9 Dígitos</label>
+                                    <input type=text class="form-control form-control-sm" name=cpfNum size=11>
+                                </td>
+                                <td valign="bottom">
+                                    <input type=button class="btn btn-primary btn-sm" value="Calcular" onClick="cpf(this.form)">
+                                </td>
+                                <td align="center">
+                                    <label for="exampleFormControlSelect1">DV</label>
+                                    <input type=text class="form-control form-control-sm" name=cpfDV size=2>
+                                </td>
+                                <td valign="bottom">
+                                    <input class="btn btn-primary btn-sm" type=reset value="Reiniciar">
+                                </td>
+                            </tr>
+                        </table>
+                        <table>
+                            <tr>
+                                <td align="center">
+                                    <label for="exampleFormControlSelect1">COMPLETO</label>
+                                    <textarea class="form-control form-control-sm" name="cpfLi" id="cpf1" rows="1" cols="15"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </center>
+                </form>
+            </div>
+ 
+            <div class="container">
+                <form>
+                    <center>
+                        <table>
+                            <tr ng-click="">
+                                <td align="center">
+                                    <label for="exampleFormControlSelect1">CNPJ 12 dígitos</label>
+                                    <input type=text class="form-control form-control-sm" name=cgcNum size=11>
+                                </td>
+                                <td valign="bottom">
+                                    <input type=button class="btn btn-primary btn-sm" value="Calcular" onClick="cgc(this.form)">
+                                </td>
+                                <td align="center">
+                                    <label for="exampleFormControlSelect1">DV</label>
+                                    <input type=text class="form-control form-control-sm" name=cgcDV size=2>
+                                </td>
+                                <td valign="bottom">
+                                    <input class="btn btn-primary btn-sm" type=reset value="Reiniciar">
+                                </td>
+                            </tr>
+                        </table>
+                        <table>
+                            <tr>
+                                <td align="center">
+                                    <label for="exampleFormControlSelect1">COMPLETO</label>
+                                    <textarea class="form-control form-control-sm" id="cnpj1" name="cgcLi" rows="1" cols="15"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </center>
+                </form>
+            </div>
+
+            <div class="container">
+                <form>
+                    <center>
+                        <table border="0">
+                            <tr>
+                                <td align="center">
+                                    <div class="container">
+                                        <label for="exampleFormControlSelect1">CNPJ 12 dígitos</label>
+                                        <input type=text class="form-control form-control-sm" name=cgcNum size=14>
+                                        <label for="exampleFormControlSelect1">Nº de Filiais</label>
+                                        <input type=text class="form-control form-control-sm" name=cgcFil size=7>
+                                    </div><br />
+                                    <div class="container">
+                                        <input class="btn btn-primary btn-sm" type=button value="Calcular" onClick="cnpj(this.form)">
+                                        <input class="btn btn-primary btn-sm" type=reset value="Reiniciar">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table>
+                            <tr>
+                                <td valign="bottom" align="center">
+                                    <label for="exampleFormControlSelect1">Filiais - DV</label>
+                                    <textarea class="form-control form-control-sm" id="cnpj1" name="cgcList" rows="5" cols="16"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </center>
+                </form>
+            </div>
+        </div>
+    </body>
+</html >
